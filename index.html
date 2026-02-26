@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Amama! 🎂</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <title>AMAMA'S BIG DAY! 🎂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #ff6b6b;
-            --yellow: #feca57;
-            --blue: #48dbfb;
-            --purple: #9b59b6;
+            --pink: #ff6b6b; --yellow: #feca57; --blue: #48dbfb; --purple: #9b59b6;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,10 +18,10 @@
             background: #fff5f7; 
         }
 
-        /* 2-Scroll Slider */
+        /* Continuous Background Sparkle Rain */
         #main-slider {
             height: 200vh;
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         section {
@@ -36,110 +33,143 @@
             text-align: center;
             padding: 20px;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Fun Background Decor */
-        .decor {
-            position: absolute; font-size: 2rem; z-index: 0;
-            animation: float 3s infinite ease-in-out;
-        }
-
+        /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(15deg) scale(1.1); }
         }
 
-        /* Typography */
+        @keyframes shake {
+            0% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+            100% { transform: rotate(-2deg); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .decor {
+            position: absolute; font-size: 3rem; z-index: 1;
+            animation: float 4s infinite ease-in-out;
+            cursor: pointer; transition: 0.3s;
+        }
+        .decor:hover { transform: scale(1.5) rotate(360deg) !important; }
+
+        /* Typography & Header */
+        .title-container { animation: popIn 1s ease-out; }
+
         h1 {
             font-family: 'Fredoka One', cursive;
-            font-size: clamp(3rem, 12vw, 6rem);
+            font-size: clamp(3.5rem, 15vw, 7rem);
             color: var(--pink);
-            text-shadow: 4px 4px 0px var(--yellow);
-            z-index: 10;
-            margin-bottom: 10px;
+            text-shadow: 6px 6px 0px var(--yellow), 10px 10px 0px rgba(0,0,0,0.05);
+            line-height: 0.9;
+            margin-bottom: 20px;
+            animation: shake 3s infinite ease-in-out;
         }
 
-        .party-sub {
-            font-size: 1.2rem;
-            font-weight: 700;
+        .party-tag {
+            display: inline-block;
             background: var(--blue);
             color: white;
-            padding: 5px 20px;
+            padding: 10px 30px;
             border-radius: 50px;
-            transform: rotate(-2deg);
+            font-weight: 900;
+            letter-spacing: 2px;
+            transform: rotate(-3deg);
+            box-shadow: 5px 5px 0px var(--purple);
+            margin-bottom: 20px;
         }
 
-        /* Interactive Balloon */
-        .balloon-zone {
-            margin-top: 50px;
+        /* Interactive Balloon Card */
+        .balloon-btn {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 100px;
+            border: 4px solid var(--blue);
             cursor: pointer;
-            transition: transform 0.2s;
+            margin-top: 40px;
+            transition: 0.3s;
+            z-index: 10;
+            box-shadow: 0 10px 0px var(--blue);
         }
-        .balloon-zone:hover { transform: scale(1.1); }
-        .balloon-msg { font-weight: 700; color: var(--purple); margin-top: 10px; }
+        .balloon-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 0px var(--blue); }
 
-        /* The Wish Card */
+        /* The Wish Card (Scroll 2) */
         .wish-card {
             background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 15px 0px #eee;
-            border: 4px solid var(--purple);
-            max-width: 500px;
-            position: relative;
+            padding: 50px;
+            border-radius: 40px;
+            border: 5px solid var(--yellow);
+            max-width: 600px;
+            box-shadow: 20px 20px 0px var(--pink);
+            transform: rotate(1deg);
+            transition: 0.5s;
         }
+        .wish-card:hover { transform: rotate(0deg) scale(1.02); }
 
-        .btn-pop {
-            background: var(--pink);
+        /* Mega Party Button */
+        .mega-btn {
+            background: var(--purple);
             color: white;
             border: none;
-            padding: 20px 40px;
+            padding: 25px 60px;
             font-family: 'Fredoka One', cursive;
-            font-size: 1.5rem;
-            border-radius: 20px;
+            font-size: 1.8rem;
+            border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 8px 0px #d63031;
-            transition: all 0.1s;
-            margin-top: 30px;
+            box-shadow: 0 10px 0px #6c3483;
+            transition: 0.1s;
+            margin-top: 50px;
+            z-index: 10;
         }
-        .btn-pop:active { transform: translateY(4px); box-shadow: 0 4px 0px #d63031; }
+        .mega-btn:active { transform: translateY(6px); box-shadow: 0 4px 0px #6c3483; }
 
         .scroll-hint {
-            position: absolute; bottom: 30px; font-weight: 700; color: var(--pink);
-            cursor: pointer; animation: bounce 2s infinite;
+            position: absolute; bottom: 30px; font-weight: 900; color: var(--pink);
+            cursor: pointer; animation: bounce 1.5s infinite; z-index: 10;
         }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-15px);} }
     </style>
 </head>
 <body>
 
     <div id="main-slider">
         <section>
-            <div class="decor" style="top:10%; left:10%;">🎈</div>
-            <div class="decor" style="top:20%; right:15%; animation-delay: 0.5s;">✨</div>
-            <div class="decor" style="bottom:20%; left:15%; animation-delay: 1s;">🎂</div>
-            
-            <p class="party-sub">FEBRUARY 2026</p>
-            <h1>HAPPY<br>BIRTHDAY</h1>
-            <h2 style="font-family: 'Fredoka One'; color: var(--purple); font-size: 3rem;">AMAMA!</h2>
-            
-            <div class="balloon-zone" onclick="moveDown()">
-                <div style="font-size: 5rem;">🎈</div>
-                <p class="balloon-msg">Tap the balloon to start the party!</p>
+            <div class="decor" style="top:15%; left:10%;">🎈</div>
+            <div class="decor" style="top:10%; right:15%; animation-delay: 0.5s;">🎁</div>
+            <div class="decor" style="bottom:20%; left:12%; animation-delay: 1.2s;">🍰</div>
+            <div class="decor" style="bottom:30%; right:10%; animation-delay: 0.8s;">🥳</div>
+
+            <div class="title-container">
+                <span class="party-tag">A MOIZ PRODUCTION</span>
+                <h1>HAPPY<br>BIRTHDAY</h1>
+                <h2 style="font-family: 'Fredoka One'; color: var(--purple); font-size: 3.5rem; letter-spacing: 2px;">AMAMA!</h2>
             </div>
-            <div class="scroll-hint" onclick="moveDown()">Scroll Down ↓</div>
+            
+            <button class="balloon-btn" onclick="moveDown()">
+                <span style="font-size: 1.5rem;">👇 START THE FUN!</span>
+            </button>
+
+            <div class="scroll-hint" onclick="moveDown()">Slide Down ↓</div>
         </section>
 
-        <section style="background: #fff0f3;">
+        <section style="background: #fffef0;">
             <div class="wish-card">
-                <h3 style="color: var(--pink); margin-bottom: 15px; font-family: 'Fredoka One';">To My Best Friend,</h3>
-                <p style="font-size: 1.2rem; line-height: 1.6; color: #444;">
-                    "Amama, you deserve a day as bright and amazing as you are! Hope your day is filled with cake, laughter, and everything you love."
+                <h3 style="color: var(--pink); font-size: 2.5rem; margin-bottom: 20px; font-family: 'Fredoka One';">To Amama! 👑</h3>
+                <p style="font-size: 1.4rem; line-height: 1.6; color: #444; font-weight: 400;">
+                    "May your year be filled with as much joy as this website! You are a superstar, a legend, and a best friend. Keep shining!"
                 </p>
-                <p style="margin-top: 20px; font-weight: 700; color: var(--purple);">Love, Moiz</p>
+                <p style="margin-top: 25px; font-weight: 900; color: var(--blue); font-size: 1.5rem;">— MOIZ</p>
             </div>
 
-            <button class="btn-pop" onclick="partyTime()">🎉 POP THE PARTY!</button>
+            <button class="mega-btn" onclick="megaPop()">🎉 PARTY EXPLOSION!</button>
             <div class="scroll-hint" style="bottom: auto; top: 30px;" onclick="moveUp()">Back to Top ↑</div>
         </section>
     </div>
@@ -151,32 +181,54 @@
         function moveDown() { slider.style.transform = 'translateY(-100vh)'; }
         function moveUp() { slider.style.transform = 'translateY(0)'; }
 
-        // Celebration Logic
-        function partyTime() {
-            var duration = 5 * 1000;
-            var end = Date.now() + duration;
+        // Continuous Rain Effect on Button Click
+        function megaPop() {
+            var duration = 15 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff6b6b', '#feca57', '#48dbfb']
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff6b6b', '#feca57', '#48dbfb']
-                });
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
 
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) { return clearInterval(interval); }
+
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#ff6b6b', '#feca57', '#48dbfb', '#9b59b6']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#ff6b6b', '#feca57', '#48dbfb', '#9b59b6']
+                }));
+            }, 250);
+
+            // Special Cannon Shot
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
+
+        // Automatic Balloon Rain
+        function autoBalloons() {
+            confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff6b6b', '#feca57']
+            });
+            confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#48dbfb', '#9b59b6']
+            });
+        }
+        setInterval(autoBalloons, 3000);
 
         // Allow Wheel Scroll
         window.addEventListener('wheel', (e) => {

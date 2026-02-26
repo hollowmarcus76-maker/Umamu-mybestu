@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMAMA'S BIG DAY! 🎂</title>
+    <title>HAPPY BIRTHDAY AMAMA! 🎂</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -17,7 +17,8 @@
             font-family: 'Outfit', sans-serif; 
             overflow: hidden; 
             background: var(--bg-color);
-            transition: background-color 0.3s ease; /* Smooth flashing transition */
+            transition: background-color 0.3s ease;
+            touch-action: none; /* Prevents default browser bounce on mobile */
         }
 
         #main-slider {
@@ -37,7 +38,40 @@
             overflow: hidden;
         }
 
-        /* Floating Decorations */
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: absolute;
+            bottom: 30px;
+            background: white;
+            border: 3px solid var(--pink);
+            color: var(--pink);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            animation: bounceArrow 2s infinite;
+        }
+
+        .nav-arrow.up {
+            bottom: auto;
+            top: 30px;
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        @keyframes bounceArrow {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Decorations */
         .decor {
             position: absolute; font-size: 3rem; z-index: 1;
             animation: float 4s infinite ease-in-out;
@@ -48,9 +82,10 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
+        /* Typography */
         h1 {
             font-family: 'Fredoka One', cursive;
-            font-size: clamp(3rem, 12vw, 6rem);
+            font-size: clamp(2.8rem, 12vw, 6rem);
             color: var(--pink);
             text-shadow: 6px 6px 0px var(--yellow);
             line-height: 0.9;
@@ -59,79 +94,47 @@
 
         .party-tag {
             display: inline-block; background: var(--blue); color: white;
-            padding: 10px 30px; border-radius: 50px; font-weight: 900;
+            padding: 10px 25px; border-radius: 50px; font-weight: 900;
             transform: rotate(-3deg); box-shadow: 5px 5px 0px var(--purple);
             margin-bottom: 20px; cursor: pointer; z-index: 10;
         }
 
-        /* Interactive Cake */
-        .cake-wrapper {
-            position: relative;
-            margin: 30px 0;
-            cursor: pointer;
-            z-index: 20;
-            transition: 0.2s;
-        }
-        .cake-wrapper:active { transform: scale(0.9); }
+        /* Cake Interaction */
+        .cake-wrapper { margin: 20px 0; cursor: pointer; z-index: 20; }
+        #cake-display { font-size: 8rem; display: inline-block; transition: transform 0.4s; }
+        .cake-instruction { font-weight: 900; color: var(--purple); margin-top: 10px; letter-spacing: 1px; }
 
-        #cake-display {
-            font-size: 8rem;
-            display: inline-block;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .cake-instruction {
-            font-weight: 900;
-            color: var(--purple);
-            margin-top: 15px;
-            letter-spacing: 1px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-
-        /* Wish Card Section 2 */
+        /* Wish Card */
         .wish-card {
             background: white;
             padding: 40px;
             border-radius: 40px;
             border: 5px solid var(--yellow);
-            max-width: 600px;
-            box-shadow: 20px 20px 0px var(--pink);
+            max-width: 550px;
+            box-shadow: 15px 15px 0px var(--pink);
             z-index: 5;
-            animation: popIn 0.8s ease-out;
         }
-
-        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         .mega-btn {
             background: var(--purple); color: white; border: none;
-            padding: 20px 50px; font-family: 'Fredoka One', cursive;
-            font-size: 1.5rem; border-radius: 30px; cursor: pointer;
-            box-shadow: 0 10px 0px #6c3483; margin-top: 30px;
-            transition: 0.1s;
+            padding: 18px 45px; font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem; border-radius: 30px; cursor: pointer;
+            box-shadow: 0 8px 0px #6c3483; margin-top: 25px;
         }
-        .mega-btn:active { transform: translateY(5px); box-shadow: 0 5px 0px #6c3483; }
-
-        .scroll-hint {
-            position: absolute; bottom: 30px; font-weight: 900; color: var(--pink);
-            cursor: pointer; animation: bounce 1.5s infinite; z-index: 10;
-        }
-        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-15px);} }
     </style>
 </head>
 <body>
 
     <div id="main-slider">
-        <section id="sec-1">
-            <div class="decor" style="top:10%; left:15%;">🎈</div>
-            <div class="decor" style="top:15%; right:10%;">🎁</div>
-            <div class="decor" style="bottom:15%; right:15%;">✨</div>
+        <section>
+            <div class="decor" style="top:10%; left:10%;">🎈</div>
+            <div class="decor" style="top:15%; right:15%;">🎁</div>
+            <div class="decor" style="bottom:25%; left:5%;">✨</div>
 
             <div class="title-container">
                 <span class="party-tag" onclick="heartShower()">MADE WITH ❤️ BY MOIZ</span>
                 <h1>HAPPY<br>BIRTHDAY</h1>
-                <h2 style="font-family: 'Fredoka One'; color: var(--purple); font-size: 3rem;">AMAMA!</h2>
+                <h2 style="font-family: 'Fredoka One'; color: var(--purple); font-size: 2.8rem;">AMAMA!</h2>
             </div>
             
             <div class="cake-wrapper" onclick="blowCandle()">
@@ -139,10 +142,12 @@
                 <p class="cake-instruction" id="cake-text">TAP TO BLOW CANDLES! 🕯️</p>
             </div>
 
-            <div class="scroll-hint" onclick="moveDown()">Scroll for Secret Message ↓</div>
+            <div class="nav-arrow" onclick="moveDown()">↓</div>
         </section>
 
-        <section id="sec-2" style="background: transparent;">
+        <section style="background: transparent;">
+            <div class="nav-arrow up" onclick="moveUp()">↑</div>
+
             <div class="wish-card">
                 <h3 style="color: var(--pink); font-size: 2rem; margin-bottom: 15px; font-family: 'Fredoka One';">To Amama! 👑</h3>
                 <p style="font-size: 1.2rem; line-height: 1.7; color: #444; font-weight: 500; font-style: italic;">
@@ -151,8 +156,7 @@
                 <p style="margin-top: 20px; font-weight: 900; color: var(--blue); font-size: 1.4rem;">— MOIZ</p>
             </div>
 
-            <button class="mega-btn" onclick="megaPop()">🎉 CELEBRATE MORE!</button>
-            <div class="scroll-hint" style="bottom: auto; top: 30px;" onclick="moveUp()">Back to Top ↑</div>
+            <button class="mega-btn" onclick="megaPop()">🎉 MEGA CELEBRATION!</button>
         </section>
     </div>
 
@@ -166,47 +170,42 @@
         function moveDown() { slider.style.transform = 'translateY(-100vh)'; }
         function moveUp() { slider.style.transform = 'translateY(0)'; }
 
-        // THE BLOW OUT & FLASH LOGIC
+        // Mobile Touch Swiping
+        let touchStartY = 0;
+        window.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; }, false);
+        window.addEventListener('touchend', e => {
+            let touchEndY = e.changedTouches[0].screenY;
+            if (touchStartY - touchEndY > 50) moveDown();
+            if (touchEndY - touchStartY > 50) moveUp();
+        }, false);
+
+        // Blow out candles logic
         function blowCandle() {
             if (!blown) {
                 blown = true;
                 cakeDisplay.innerText = '🍰';
-                cakeDisplay.style.transform = 'scale(1.5)';
-                cakeText.innerText = 'YUMMY! 😋 SCROLL DOWN!';
-                cakeText.style.color = '#ff6b6b';
-
-                // Flash background effect
+                cakeDisplay.style.transform = 'scale(1.4)';
+                cakeText.innerText = 'YUMMY! 😋 TAP ARROW BELOW!';
+                
                 const partyColors = ['#ff6b6b', '#feca57', '#48dbfb', '#9b59b6', '#fff5f7'];
                 let i = 0;
                 const flashInterval = setInterval(() => {
                     document.body.style.backgroundColor = partyColors[i];
                     i++;
-                    if (i === partyColors.length) {
-                        clearInterval(flashInterval);
-                        document.body.style.backgroundColor = '#fff5f7'; // Reset to soft pink
-                    }
+                    if (i === partyColors.length) { clearInterval(flashInterval); document.body.style.backgroundColor = '#fff5f7'; }
                 }, 100);
 
-                // Big Explosion
-                confetti({
-                    particleCount: 200,
-                    spread: 90,
-                    origin: { y: 0.6 },
-                    colors: ['#ff6b6b', '#feca57', '#ffffff']
-                });
-
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 setTimeout(() => { cakeDisplay.style.transform = 'scale(1)'; }, 300);
             } else {
-                confetti({ particleCount: 30, scalar: 0.8, origin: { y: 0.6 } });
+                confetti({ particleCount: 40, scalar: 0.8, origin: { y: 0.6 } });
             }
         }
 
-        function heartShower() {
-            confetti({ particleCount: 50, spread: 70, origin: { y: 0.3 }, colors: ['#ff6b6b'], shapes: ['circle'] });
-        }
+        function heartShower() { confetti({ particleCount: 60, spread: 80, origin: { y: 0.3 }, colors: ['#ff6b6b'], shapes: ['circle'] }); }
 
         function megaPop() {
-            var duration = 5 * 1000;
+            var duration = 6 * 1000;
             var end = Date.now() + duration;
             (function frame() {
                 confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff6b6b', '#feca57'] });
@@ -215,11 +214,7 @@
             }());
         }
 
-        // Handle Scroll Wheel
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0) moveDown();
-            else moveUp();
-        });
+        window.addEventListener('wheel', (e) => { if (e.deltaY > 0) moveDown(); else moveUp(); });
     </script>
 </body>
 </html>

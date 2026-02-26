@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAMA // 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;900&family=Playfair+Display:ital,wght@1,400;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --accent: #70d6ff;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory; /* Forces 2-scroll feel */
+        }
+
+        section {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Kinetic Text */
+        .bg-text {
+            position: absolute;
+            font-size: 30vw;
+            font-weight: 900;
+            color: rgba(0,0,0,0.03);
+            z-index: 0;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        /* Section 1 Styles */
+        .hero-content { z-index: 10; text-align: center; }
+        .hero-content h1 { font-size: clamp(4rem, 15vw, 10rem); line-height: 0.8; letter-spacing: -5px; }
+        .hero-content p { margin-top: 20px; font-weight: 100; letter-spacing: 10px; text-transform: uppercase; color: var(--primary); }
+
+        /* Section 2 Styles */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            z-index: 10;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 40px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: 0.5s;
+        }
+
+        .glass-panel:hover { transform: scale(1.02); background: #fff; border-color: var(--primary); }
+
+        .wish-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; line-height: 1.4; }
+
+        /* Interactive Prize */
+        .prize-btn {
+            background: var(--text);
+            color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .prize-btn:hover { background: var(--primary); }
+
+        .custom-cursor {
+            width: 20px; height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: 1fr; }
+            section { height: auto; min-height: 100vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <section>
+        <div class="bg-text">AMAMA</div>
+        <div class="hero-content">
+            <p>A Message from Moiz</p>
+            <h1>HAPPY<br>BIRTH<br>DAY.</h1>
+            <div style="margin-top: 40px; font-size: 0.8rem; letter-spacing: 5px; opacity: 0.4;">SCROLL TO UNBOX ↓</div>
+        </div>
+    </section>
+
+    <section style="background: #f9f9f9;">
+        <div class="bg-text" style="bottom: 0; top: auto;">2026</div>
+        <div class="grid-container">
+            <div class="glass-panel">
+                <span style="color: var(--primary); font-weight: 900; margin-bottom: 10px;">01 // THE WISH</span>
+                <p class="wish-text">"To Amama: Your brilliance is rare, and your heart is gold. May this year be your most powerful one yet."</p>
+                <p style="margin-top: 20px; font-weight: 700; font-size: 0.8rem;">— MOIZ</p>
+            </div>
+            
+            <div class="glass-panel">
+                <span style="color: var(--primary); font-weight: 900; margin-bottom: 10px;">02 // THE GIFT</span>
+                <p>Click below to initialize the birthday sequence for 2026.</p>
+                <div class="prize-btn" onclick="celebrate()">LAUNCH FINALE ⚡</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Celebration
+        function celebrate() {
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#ff4d6d', '#70d6ff']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#ff4d6d', '#70d6ff']
+                }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
